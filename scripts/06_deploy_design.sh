@@ -58,14 +58,14 @@ for stage, subscription in [('filter', 'ms4-reading-filter-sub'),
     items.append({
         'apiVersion': 'apps/v1', 'kind': 'Deployment',
         'metadata': {'name': name, 'namespace': NAMESPACE, 'labels': {'assignment': 'ms4'}},
-        'spec': {'replicas': 1, 'selector': {'matchLabels': {'app': app}},
+        'spec': {'replicas': 1, 'strategy': {'type': 'Recreate'}, 'selector': {'matchLabels': {'app': app}},
                  'template': {'metadata': {'labels': {'app': app}},
                               'spec': {'serviceAccountName': 'ms4-voting',
                                        'containers': [{'name': app, 'image': images[stage],
                                            'env': [{'name': 'GCP_PROJECT', 'value': PROJECT},
                                                    {'name': 'TOPIC_NAME', 'value': TOPIC},
                                                    {'name': 'SUBSCRIPTION_ID', 'value': subscription}],
-                                           'resources': {'requests': {'cpu': '100m', 'memory': '128Mi'},
+                                           'resources': {'requests': {'cpu': '25m', 'memory': '128Mi'},
                                                          'limits': {'cpu': '500m', 'memory': '256Mi'}}}]}}}})
 Path('deploy').mkdir(exist_ok=True)
 # JSON is valid YAML and kubectl accepts a Kubernetes List manifest.

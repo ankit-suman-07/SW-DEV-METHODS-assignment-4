@@ -30,7 +30,7 @@
             "containers": [
               {
                 "name": "filter-reading",
-                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/filter-reading:082159dc3feb-design",
+                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/filter-reading:cd2600654a47-design",
                 "env": [
                   {
                     "name": "GCP_PROJECT",
@@ -47,7 +47,7 @@
                 ],
                 "resources": {
                   "requests": {
-                    "cpu": "100m",
+                    "cpu": "25m",
                     "memory": "128Mi"
                   },
                   "limits": {
@@ -58,6 +58,9 @@
               }
             ]
           }
+        },
+        "strategy": {
+          "type": "Recreate"
         }
       }
     },
@@ -89,7 +92,7 @@
             "containers": [
               {
                 "name": "convert-reading",
-                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/convert-reading:082159dc3feb-design",
+                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/convert-reading:cd2600654a47-design",
                 "env": [
                   {
                     "name": "GCP_PROJECT",
@@ -106,7 +109,7 @@
                 ],
                 "resources": {
                   "requests": {
-                    "cpu": "100m",
+                    "cpu": "25m",
                     "memory": "128Mi"
                   },
                   "limits": {
@@ -117,6 +120,9 @@
               }
             ]
           }
+        },
+        "strategy": {
+          "type": "Recreate"
         }
       }
     }

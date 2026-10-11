@@ -15,7 +15,7 @@ spec:
       serviceAccountName: ms4-voting
       containers:
         - name: logger
-          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/logger:abacf8dbd93b-ms4
+          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/logger:7aecaa255e3b-ms4
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -51,7 +51,7 @@ spec:
       serviceAccountName: ms4-voting
       containers:
         - name: recorder
-          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/recorder:abacf8dbd93b-ms4
+          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/recorder:7aecaa255e3b-ms4
           imagePullPolicy: IfNotPresent
           resources:
             requests:

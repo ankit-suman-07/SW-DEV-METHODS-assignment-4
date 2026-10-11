@@ -100,7 +100,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/postgres:abacf8dbd93b-ms4
+          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/postgres:7aecaa255e3b-ms4
           resources:
             requests: {cpu: 250m, memory: 256Mi}
             limits: {cpu: 1000m, memory: 1Gi}

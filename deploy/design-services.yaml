@@ -1,0 +1,124 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "filter-reading-deployment",
+        "namespace": "ms4",
+        "labels": {
+          "assignment": "ms4"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "filter-reading"
+          }
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "filter-reading"
+            }
+          },
+          "spec": {
+            "serviceAccountName": "ms4-voting",
+            "containers": [
+              {
+                "name": "filter-reading",
+                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/filter-reading:737ca222f4c7-design",
+                "env": [
+                  {
+                    "name": "GCP_PROJECT",
+                    "value": "project-9ac387a6-66c9-4c04-81d"
+                  },
+                  {
+                    "name": "TOPIC_NAME",
+                    "value": "smartMeterDesign"
+                  },
+                  {
+                    "name": "SUBSCRIPTION_ID",
+                    "value": "ms4-reading-filter-sub"
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "256Mi"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "name": "convert-reading-deployment",
+        "namespace": "ms4",
+        "labels": {
+          "assignment": "ms4"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "matchLabels": {
+            "app": "convert-reading"
+          }
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "convert-reading"
+            }
+          },
+          "spec": {
+            "serviceAccountName": "ms4-voting",
+            "containers": [
+              {
+                "name": "convert-reading",
+                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/convert-reading:737ca222f4c7-design",
+                "env": [
+                  {
+                    "name": "GCP_PROJECT",
+                    "value": "project-9ac387a6-66c9-4c04-81d"
+                  },
+                  {
+                    "name": "TOPIC_NAME",
+                    "value": "smartMeterDesign"
+                  },
+                  {
+                    "name": "SUBSCRIPTION_ID",
+                    "value": "ms4-reading-convert-sub"
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  },
+                  "limits": {
+                    "cpu": "500m",
+                    "memory": "256Mi"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

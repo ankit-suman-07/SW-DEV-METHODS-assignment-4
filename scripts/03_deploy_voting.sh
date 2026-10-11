@@ -287,10 +287,7 @@ gcloud projects add-iam-policy-binding "$PROJECT_ID" \
 gcloud artifacts repositories add-iam-policy-binding sofe4630u \
   --location="$REGION" --project="$PROJECT_ID" --member="serviceAccount:$NODE_SA" \
   --role=roles/artifactregistry.reader --condition=None --quiet --format='value(etag)'
-gcloud iam service-accounts add-iam-policy-binding "$MS4_SERVICE_ACCOUNT" \
-  --project="$PROJECT_ID" --role=roles/iam.workloadIdentityUser \
-  --member="serviceAccount:${PROJECT_ID}.svc.id.goog[${NAMESPACE}/${KSA}]" \
-  --condition=None --quiet --format='value(etag)'
+
 
 printf '\n[3/6] Creating or checking the single-node cluster (billable resource)\n'
 if gcloud container clusters describe "$CLUSTER" --zone="$ZONE" --project="$PROJECT_ID" >/dev/null; then
@@ -313,6 +310,11 @@ gcloud container clusters get-credentials "$CLUSTER" --zone="$ZONE" --project="$
   printf 'Unexpected Kubernetes context. Stopped before deployment.\n' >&2; exit 1;
 }
 KUBE_READY=1
+
+gcloud iam service-accounts add-iam-policy-binding "$MS4_SERVICE_ACCOUNT" \
+  --project="$PROJECT_ID" --role=roles/iam.workloadIdentityUser \
+  --member="serviceAccount:${PROJECT_ID}.svc.id.goog[${NAMESPACE}/${KSA}]" \
+  --condition=None --quiet --format='value(etag)'
 
 printf '\n[4/6] Applying internal database services and persistent storage\n'
 prepare_files

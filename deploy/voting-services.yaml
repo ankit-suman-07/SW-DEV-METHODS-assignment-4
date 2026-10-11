@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logger-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: logger
+  template:
+    metadata:
+      labels:
+        app: logger
+    spec:
+      serviceAccountName: ms4-voting
+      containers:
+        - name: logger
+          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/logger:abacf8dbd93b-ms4
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: GCP_PROJECT
+              value: project-9ac387a6-66c9-4c04-81d
+            - name: ELECTION_SUB_ID
+              value: election-submit-sub
+            - name: TOPIC_NAME
+              value: election
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recorder-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: recorder
+  template:
+    metadata:
+      labels:
+        app: recorder
+    spec:
+      serviceAccountName: ms4-voting
+      containers:
+        - name: recorder
+          image: northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/recorder:abacf8dbd93b-ms4
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: POSTGRES_HOST
+              value: postgres
+            - name: GCP_PROJECT
+              value: project-9ac387a6-66c9-4c04-81d
+            - name: ELECTION_SUB_ID
+              value: election-record-sub
+            - name: TOPIC_NAME
+              value: election

@@ -1,0 +1,21 @@
+MS4 voting integration test
+Project: project-9ac387a6-66c9-4c04-81d
+Isolated test IDs: election=1155262831, machine=1841777868, voter=609463869
+PASS: election-submit-sub topic and filter
+PASS: election-record-sub topic and filter
+Temporary test subscriptions created before publishing.
+PASS: test election has no previous rows
+First response: {'result': 'successful', 'UUID': 'e75482ed-d459-41a5-ae89-31b0e76b3b7e'}
+PASS: first vote accepted with matching UUID
+PASS: forwarded record excludes voter ID
+PASS: forwarded record preserves vote and correlation fields
+PASS: PostgreSQL stores exactly one correct vote
+PASS: Redis remembers voter and election
+Repeated-voter response: {'result': 'Already Voted!!!', 'UUID': 'ecc400b2-3cc8-483a-a38a-e158800a902b'}
+PASS: repeated voter rejected with matching UUID
+PASS: rejected vote creates no additional database row
+ALL VOTING TESTS PASSED.
+This verifies sequential voting, not concurrent delivery or failure recovery.
+The isolated test row and Redis key remain as demonstration evidence.
+Removed temporary subscription: ms4-test-record-bc117d6e6dc74ccb9b89423c6bfec1e1
+Removed temporary subscription: ms4-test-result-bc117d6e6dc74ccb9b89423c6bfec1e1

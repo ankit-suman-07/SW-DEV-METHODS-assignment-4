@@ -7,14 +7,11 @@ import random                           # to generate random values
 import threading                        # for creating threads
 import uuid                             # to generate a unique identifier
 
-# Search the current directory for the JSON file (including the Google Pub/Sub credential) 
-# to set the GOOGLE_APPLICATION_CREDENTIALS environment variable.
-files=glob.glob("*.json")
-if len(files)>0:
-   os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=files[0];
+# MS4: use Application Default Credentials (no embedded key files).
+# GKE uses Workload Identity; Cloud Shell uses locally authorized ADC.
 
 #To do: Set the project ID, topic name and the subscription_id 
-project_id = ""
+project_id = os.environ.get("GCP_PROJECT", "project-9ac387a6-66c9-4c04-81d")
 topic_name = "election"
 
 # let the user enter the election and machine IDs
@@ -23,7 +20,7 @@ machineID = int(input("Please enter the machine ID (integer): "))
 
 debug=False;  # change to True for debugging
 if debug:
-    print(files[0]);
+    print("Authentication: Application Default Credentials")
     print(electionID);
     print(machineID);
     print(project_id);

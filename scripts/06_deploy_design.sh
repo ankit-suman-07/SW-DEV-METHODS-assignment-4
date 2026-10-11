@@ -170,7 +170,7 @@ try:
             raise RuntimeError('Existing subscription has different topic or filter: ' + name)
         config = description.get('bigqueryConfig', {})
         if function == 'converted':
-            if config.get('table') != TABLE_API or not config.get('useTableSchema'):
+            if config.get('table') not in (TABLE_API, TABLE_RESOURCE) or not config.get('useTableSchema'):
                 raise RuntimeError('Existing BigQuery subscription configuration differs; stopped.')
         elif config or description.get('pushConfig', {}).get('pushEndpoint'):
             raise RuntimeError('Expected a pull subscription for worker: ' + name)

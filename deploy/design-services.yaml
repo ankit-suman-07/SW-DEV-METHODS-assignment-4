@@ -30,7 +30,7 @@
             "containers": [
               {
                 "name": "filter-reading",
-                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/filter-reading:737ca222f4c7-design",
+                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/filter-reading:082159dc3feb-design",
                 "env": [
                   {
                     "name": "GCP_PROJECT",
@@ -89,7 +89,7 @@
             "containers": [
               {
                 "name": "convert-reading",
-                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/convert-reading:737ca222f4c7-design",
+                "image": "northamerica-northeast2-docker.pkg.dev/project-9ac387a6-66c9-4c04-81d/sofe4630u/convert-reading:082159dc3feb-design",
                 "env": [
                   {
                     "name": "GCP_PROJECT",
